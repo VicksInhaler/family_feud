@@ -1,0 +1,39 @@
+RETRO FAMILY FEUD — HOW TO EDIT QUESTIONS
+
+Edit this file in Notepad:
+  questions.js
+
+Do NOT edit index.html just to change questions or answers.
+
+Each question looks like this:
+
+ {cat:'Retro Gadgets',
+  q:'Name a gadget people commonly used before smartphones became popular.',
+  a:[
+    ['Nokia / Basic Cellphone',30],
+    ['MP3 Player / iPod',24],
+    ['Digital Camera',19],
+    ['Portable CD Player / Discman',15],
+    ['Pager / Beeper',12]
+  ],
+  notes:'Accepted alternatives / host notes here.'},
+
+RULES / TIPS
+1. cat = category shown to the host/audience.
+2. q = question text.
+3. a = answer list. Each item is ['Answer', points].
+4. notes = host notes / accepted alternatives.
+5. Recommended: keep 5 answers per question for the current Family Feud layout.
+6. Recommended: make the answer points total 100.
+7. Keep commas, brackets, and quote marks in place.
+8. Keep the Tie-Breaker as the LAST question in the file.
+9. Save questions.js, then refresh/reopen index.html.
+10. Keep questions.js in the SAME folder as index.html.
+
+AUDIO
+If using the external wrong-answer sound, also keep:
+  wrong-answer.mp3
+in the same folder as index.html.
+
+WINNER PAGE
+Keep winner.html in the same folder as index.html.

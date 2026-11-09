@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Retro Family Feud — Blast from the Past</title>
+<style>
+:root{
+  --bg:#07030c; --bg2:#14051d; --panel:#160b26; --panel2:#23103b;
+  --pink:#ff0b8f; --magenta:#c5169a; --purple:#7b2cff; --violet:#4d2ab8;
+  --cyan:#21c7ff; --blue:#1877ff; --orange:#ff7a00; --yellow:#ffd51f;
+  --white:#fff8ff; --muted:#cbb8d4; --danger:#ff3158; --good:#6dffbd;
+  --shadow:0 0 22px rgba(255,11,143,.28),0 0 48px rgba(33,199,255,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--white);font-family:Inter,Segoe UI,Arial,sans-serif;overflow-x:hidden}
+body{
+  background:
+    radial-gradient(circle at 50% 20%,rgba(255,11,143,.26),transparent 34%),
+    radial-gradient(circle at 12% 45%,rgba(123,44,255,.18),transparent 30%),
+    radial-gradient(circle at 86% 32%,rgba(33,199,255,.12),transparent 24%),
+    linear-gradient(180deg,#100414 0%,#1b0620 45%,#06040c 100%);
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.46;background-image:
+ radial-gradient(circle,#fff 0 1px,transparent 1.4px),radial-gradient(circle,#fff 0 1px,transparent 1.4px);
+ background-size:82px 82px,117px 117px;background-position:0 0,38px 19px;mask-image:linear-gradient(to bottom,#000 0 56%,transparent 80%)}
+body:after{content:"";position:fixed;left:-10%;right:-10%;bottom:-8vh;height:42vh;pointer-events:none;opacity:.6;
+ background-image:linear-gradient(rgba(33,199,255,.7) 2px,transparent 2px),linear-gradient(90deg,rgba(33,199,255,.65) 2px,transparent 2px);
+ background-size:48px 36px;transform:perspective(430px) rotateX(62deg);transform-origin:bottom;filter:drop-shadow(0 0 8px rgba(33,199,255,.5));}
+button,input,select{font:inherit}
+button{border:0;color:var(--white);cursor:pointer}
+.app{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-rows:auto 1fr auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.09);background:rgba(8,3,14,.62);backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}.brand-badge{width:46px;height:46px;border-radius:50%;background:conic-gradient(from 210deg,var(--pink),var(--orange),var(--cyan),var(--purple),var(--pink));box-shadow:0 0 28px rgba(255,11,143,.45);position:relative;flex:0 0 auto}.brand-badge:after{content:"";position:absolute;inset:7px;border-radius:50%;background:#09030d;border:3px solid rgba(255,255,255,.9)}
+.brand h1{font-size:50px;margin:0;letter-spacing:.05em;text-transform:uppercase;font-weight:1000;font-style:italic;line-height:1}.brand h1 span{background:linear-gradient(180deg,#fff 10%,#ff9cd0 44%,var(--pink) 72%,var(--orange));-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(255,255,255,.28))}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-top:5px}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.btn{padding:10px 14px;border-radius:12px;background:linear-gradient(180deg,#342046,#1b1028);border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 18px rgba(0,0,0,.2);font-weight:800}.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}.btn.hot{background:linear-gradient(135deg,var(--pink),#a521dd);box-shadow:0 0 22px rgba(255,11,143,.25)}.btn.cyan{background:linear-gradient(135deg,#096fbc,var(--cyan));color:#02101a}.btn.warn{background:linear-gradient(135deg,#ce2b44,var(--danger))}.btn.ghost{background:rgba(255,255,255,.05)}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:22px;padding:22px 24px 26px;max-width:1600px;width:100%;margin:0 auto}
+.stage{min-width:0}.score-row{display:grid;grid-template-columns:1fr minmax(190px,.62fr) 1fr;gap:14px;margin-bottom:16px}.team-card,.bank-card{border-radius:18px;padding:13px 18px;background:linear-gradient(180deg,rgba(36,13,52,.94),rgba(17,7,28,.95));border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow);position:relative;overflow:hidden}.team-card:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--cyan),var(--purple))}.team-card.team-b:before{background:linear-gradient(90deg,var(--orange),var(--pink))}.score-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.16em;font-weight:900}.score-value{font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:clamp(36px,5vw,66px);line-height:1;margin-top:5px;letter-spacing:.04em;text-shadow:0 0 18px rgba(33,199,255,.35)}.team-b .score-value{text-shadow:0 0 18px rgba(255,11,143,.4)}.team-name{font-size:30px;font-weight:900;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bank-card{text-align:center;background:linear-gradient(180deg,rgba(71,17,85,.96),rgba(27,6,35,.96));border-color:rgba(255,213,31,.35)}.bank-card .score-value{color:var(--yellow);text-shadow:0 0 18px rgba(255,213,31,.45)}
+.board-shell{border-radius:28px;padding:4px;background:linear-gradient(135deg,var(--pink),var(--orange) 31%,var(--cyan) 68%,var(--purple));box-shadow:0 0 38px rgba(255,11,143,.24),0 0 40px rgba(33,199,255,.16)}
+.board{border-radius:25px;background:linear-gradient(180deg,#180520 0%,#10041a 52%,#09030e 100%);padding:24px;position:relative;overflow:hidden;min-height:560px}.board:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 7px,rgba(255,255,255,.018) 8px 9px);mix-blend-mode:screen}.question-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;position:relative}.q-kicker{color:var(--cyan);font-weight:950;letter-spacing:.16em;text-transform:uppercase;font-size:12px}.round-chip{padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);color:var(--muted);font-weight:800;font-size:12px}.question{position:relative;text-align:center;font-weight:950;font-size:clamp(24px,3vw,42px);line-height:1.1;margin:6px auto 20px;max-width:1000px;text-shadow:0 0 18px rgba(255,255,255,.09)}
+.answer-grid{display:grid;gap:11px;position:relative;max-width:1050px;margin:0 auto}.answer{min-height:69px;border-radius:15px;background:linear-gradient(180deg,#2b123b,#170a24);border:1px solid rgba(255,255,255,.14);display:grid;grid-template-columns:62px 1fr 88px;align-items:center;overflow:hidden;box-shadow:inset 0 0 25px rgba(123,44,255,.06),0 8px 18px rgba(0,0,0,.18);transition:.25s ease}.answer .rank{height:100%;display:grid;place-items:center;font-family:Impact,Haettenschweiler,sans-serif;font-size:31px;background:linear-gradient(180deg,rgba(33,199,255,.18),rgba(123,44,255,.18));border-right:1px solid rgba(255,255,255,.1);color:#cbefff}.answer .ans-text{padding:0 18px;font-size:clamp(18px,2vw,29px);font-weight:950;letter-spacing:.025em}.answer .pts{height:100%;display:grid;place-items:center;font-family:Impact,Haettenschweiler,sans-serif;font-size:30px;color:var(--yellow);background:rgba(0,0,0,.22);border-left:1px solid rgba(255,255,255,.1)}.answer.hidden-answer .ans-text,.answer.hidden-answer .pts{color:transparent;text-shadow:none}.answer.hidden-answer .ans-text:after{content:"••••••••";color:rgba(255,255,255,.32);letter-spacing:.15em;font-size:18px}.answer.hidden-answer .pts:after{content:"?";color:rgba(255,213,31,.72)}.answer.revealed{background:linear-gradient(90deg,rgba(255,11,143,.24),rgba(123,44,255,.28) 48%,rgba(33,199,255,.19));border-color:rgba(255,255,255,.28);transform:scale(1.008);box-shadow:0 0 22px rgba(255,11,143,.17),inset 0 0 26px rgba(33,199,255,.08)}
+.strike-overlay{position:absolute;inset:0;display:none;place-items:center;pointer-events:none;z-index:5}.audience #fullscreenBtn{display:none!important}
+.audience .strike-overlay{display:grid}.strike-x{font-family:Impact,Haettenschweiler,sans-serif;font-size:min(42vw,420px);line-height:.8;color:var(--danger);text-shadow:0 0 18px #fff,0 0 55px rgba(255,49,88,.82);opacity:0;transform:scale(.55) rotate(-8deg);transition:.18s}.strike-x.show{opacity:.96;transform:scale(1) rotate(-8deg)}
+.strikes{display:flex;justify-content:center;gap:13px;margin-top:18px}.strike-dot{width:54px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);font-family:Impact,Haettenschweiler,sans-serif;font-size:30px;color:rgba(255,255,255,.19)}.strike-dot.on{color:#fff;background:linear-gradient(135deg,#f01454,#ff5a38);box-shadow:0 0 22px rgba(255,49,88,.55)}
+.host{align-self:start;position:sticky;top:14px;max-height:calc(100vh - 28px);overflow:auto;padding-right:3px}.host-card{background:linear-gradient(180deg,rgba(31,12,45,.97),rgba(14,6,23,.98));border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.34);margin-bottom:14px}.host-card h2,.host-card h3{margin:0 0 12px}.host-card h2{font-size:20px}.host-card h3{font-size:14px;color:var(--cyan);text-transform:uppercase;letter-spacing:.12em}.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.control-grid .wide{grid-column:1/-1}.select,input[type=text]{width:100%;border-radius:11px;background:#10081b;color:var(--white);border:1px solid rgba(255,255,255,.13);padding:10px 11px}.answer-controls{display:grid;gap:7px}.ans-btn{display:grid;grid-template-columns:30px 1fr 44px;align-items:center;text-align:left;padding:9px 10px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);font-weight:800}.ans-btn:hover{background:rgba(255,255,255,.1)}.ans-btn.done{background:rgba(109,255,189,.12);border-color:rgba(109,255,189,.35)}.ans-btn .mini-pts{text-align:right;color:var(--yellow)}.small{font-size:12px;color:var(--muted);line-height:1.45}.host-notes{padding:10px 12px;border-radius:11px;background:rgba(33,199,255,.06);border-left:3px solid var(--cyan);font-size:12px;color:#dbcfe1;line-height:1.45}.left-host-controls{display:grid;gap:14px;margin-top:14px}.left-host-controls .host-card{margin-bottom:0}.audience .left-host-controls{display:none}.footer{padding:8px 24px 16px;text-align:center;color:#8e7d98;font-size:11px;letter-spacing:.08em}body:not(.audience) .board-shell{display:none}body:not(.audience) .stage{align-self:start}body:not(.audience) .main{grid-template-columns:minmax(420px,.85fr) minmax(420px,1.15fr)}.audience .host,.audience .top-actions .host-only{display:none}.audience .main{grid-template-columns:1fr;max-width:1450px}.audience .board{min-height:650px}.audience .topbar{justify-content:center}.audience .brand{transform:scale(1.07)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:#0b0610;border:1px solid rgba(255,255,255,.16);padding:12px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.2s;z-index:20;box-shadow:0 12px 28px rgba(0,0,0,.4)}.toast.show{opacity:1;transform:translate(-50%,0)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;place-items:center;z-index:30;padding:20px}.modal.open{display:grid}.modal-card{width:min(680px,94vw);background:linear-gradient(180deg,#38104d,#15071f);border:2px solid rgba(255,213,31,.42);border-radius:28px;padding:30px;box-shadow:0 0 70px rgba(255,11,143,.35),0 0 110px rgba(33,199,255,.14);position:relative;overflow:hidden}.modal-card:before{content:"";position:absolute;inset:-2px;background:linear-gradient(110deg,transparent 12%,rgba(255,255,255,.12) 28%,transparent 44%);transform:translateX(-120%);animation:winnerShine 2.1s linear infinite;pointer-events:none}.winner{font-family:Impact,Haettenschweiler,sans-serif;font-size:clamp(52px,10vw,104px);text-align:center;background:linear-gradient(180deg,#fff,var(--yellow) 42%,var(--orange) 72%,var(--pink));-webkit-background-clip:text;color:transparent;text-shadow:0 0 30px rgba(255,11,143,.2);filter:drop-shadow(0 0 16px rgba(255,213,31,.22))}@keyframes winnerShine{to{transform:translateX(150%)}}#confettiCanvas{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:40;display:none}#confettiCanvas.show{display:block}
+@media(max-width:1050px){.main{grid-template-columns:1fr}.host{position:static;max-height:none}.board{min-height:auto}.score-row{grid-template-columns:1fr 1fr}.bank-card{grid-column:1/-1;grid-row:2}.topbar{align-items:flex-start}}
+@media(max-width:680px){.topbar,.main{padding-left:12px;padding-right:12px}.topbar{flex-direction:column}.top-actions{justify-content:flex-start}.score-row{grid-template-columns:1fr 1fr}.team-card,.bank-card{padding:10px}.board{padding:14px;border-radius:19px}.board-shell{border-radius:22px}.answer{grid-template-columns:47px 1fr 62px;min-height:60px}.answer .rank{font-size:25px}.answer .ans-text{font-size:17px;padding:0 10px}.answer .pts{font-size:24px}.strike-dot{width:48px}.control-grid{grid-template-columns:1fr}.control-grid .wide{grid-column:auto}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="topbar">
+    <div class="brand"><div class="brand-badge"></div><div><h1><span>Retro Family Feud</span></h1><small>Blast from the Past • Year-End Party Edition</small></div></div>
+    <div class="top-actions">
+      <button class="btn ghost host-only" id="audienceBtn">Open Audience Window</button>
+      <button class="btn ghost" id="fullscreenBtn">Fullscreen</button>
+      <button class="btn hot host-only" id="toggleHostBtn">Audience View</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="stage">
+      <div class="score-row">
+        <div class="team-card"><div class="score-value" id="scoreA">0</div><div class="team-name" id="teamAName">TEAM A</div></div>
+        <div class="bank-card"><div class="score-label">Round Bank</div><div class="score-value" id="bank">0</div><div class="team-name">POINTS IN PLAY</div></div>
+        <div class="team-card team-b"><div class="score-value" id="scoreB">0</div><div class="team-name" id="teamBName">TEAM B</div></div>
+      </div>
+
+      <div class="board-shell"><div class="board">
+        <div class="question-meta"><div class="q-kicker" id="category">Retro Gadgets</div><div class="round-chip" id="qIndex">QUESTION 01 / 10</div></div>
+        <div class="question" id="question"></div>
+        <div class="answer-grid" id="answerGrid"></div>
+        <div class="strikes" id="strikes"></div>
+        <div class="strike-overlay"><div class="strike-x" id="strikeX">X</div></div>
+      </div></div>
+
+      <div class="left-host-controls host-only" id="leftHostControls">
+        <div class="host-card">
+          <h3>Award Round Bank</h3>
+          <div class="control-grid">
+            <button class="btn cyan" id="awardA">Give to Team A</button><button class="btn hot" id="awardB">Give to Team B</button>
+            <button class="btn ghost" id="minusA">A −10</button><button class="btn ghost" id="plusA">A +10</button>
+            <button class="btn ghost" id="minusB">B −10</button><button class="btn ghost" id="plusB">B +10</button>
+          </div>
+        </div>
+
+        <div class="host-card">
+          <h3>Team Names</h3>
+          <div class="control-grid"><input id="teamAInput" type="text" value="TEAM A"><input id="teamBInput" type="text" value="TEAM B"><button class="btn wide" id="applyNames">Apply Names</button></div>
+        </div>
+
+        <div class="host-card"><h3>Host Notes</h3><div class="host-notes" id="hostNotes"></div></div>
+
+        <div class="host-card">
+          <h3>Game Controls</h3>
+          <div class="control-grid"><button class="btn ghost" id="winnerBtn">Show Winner</button><button class="btn warn" id="resetGameBtn">Reset Entire Game</button></div>
+          <p class="small">Tip: project the Audience Window. Keep this host screen on your laptop. Answer reveals, strikes and scores sync automatically.</p>
+        </div>
+      </div>
+    </section>
+
+    <aside class="host" id="hostPanel">
+      <div class="host-card">
+        <h2>HOST CONTROL PANEL</h2>
+        <div class="control-grid">
+          <select class="select wide" id="questionSelect"></select>
+          <button class="btn" id="prevBtn">← Previous</button><button class="btn" id="nextBtn">Next →</button>
+          <button class="btn cyan wide" id="strikeBtn">Wrong Answer / Strike</button>
+          <button class="btn" id="undoBtn">Undo</button><button class="btn warn" id="resetRoundBtn">Reset Question</button>
+        </div>
+      </div>
+
+      <div class="host-card"><h3>Reveal Answers</h3>
+        <div class="answer-controls" id="answerControls"></div>
+        <button class="btn ghost wide" id="revealAllBtn" style="margin-top:12px">Reveal All Answers (No Score)</button>
+        <p class="small">The host always sees the complete answer key and point values here. Revealing an answer changes only the audience board. “Reveal All” displays every answer to the audience without adding anything to the Round Bank.</p>
+      </div>
+
+    </aside>
+  </main>
+  <footer class="footer">SIMULATED SURVEY SCORES • RETRO FAMILY FEUD • LOCAL OFFLINE GAME</footer>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modal" id="winnerModal"><div class="modal-card"><div class="score-label" style="text-align:center">AND THE WINNER IS…</div><div class="winner" id="winnerText">TEAM A</div><div style="text-align:center;font-size:22px;font-weight:900" id="winnerScore"></div><div style="text-align:center;margin-top:18px"><button class="btn hot" id="closeWinner">Back to Game</button></div></div></div>
+<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+<script src="questions.js"></script>
+<script>
+const questions=window.RETRO_FEUD_QUESTIONS || [];
+
+const mainQuestionCount=questions.length-1;
+const tieBreakerIndex=questions.length-1;
+const blankReveals=(qIndex=0)=>Array((questions[qIndex]?.a||[]).length).fill(false);
+const defaults=()=>({q:0,revealed:blankReveals(0),showAll:false,strikes:0,scoreA:0,scoreB:0,teamA:'TEAM A',teamB:'TEAM B',history:[]});
+let state=defaults(); let childWin=null; let audioCtx=null;
+const el=id=>document.getElementById(id); const audienceParam=new URLSearchParams(location.search).get('audience')==='1';
+if(audienceParam) document.body.classList.add('audience');
+function snapshot(){return JSON.parse(JSON.stringify({...state,history:[]}));}
+function pushHistory(){state.history.push(snapshot()); if(state.history.length>50)state.history.shift();}
+function sendState(){ if(childWin && !childWin.closed) childWin.postMessage({type:'retro-state',state:snapshot()},'*'); if(window.opener) window.opener.postMessage({type:'retro-request'},'*'); }
+window.addEventListener('message',e=>{ if(e.data?.type==='retro-state'){const h=state.history;state={...e.data.state,history:h};render(false);} if(e.data?.type==='retro-request' && !audienceParam){sendState();} if(e.data?.type==='retro-strike' && audienceParam){showStrikeOverlay();} });
+function save(){try{localStorage.setItem('retroFeudState',JSON.stringify(snapshot()))}catch(e){} sendState()}
+function load(){try{const s=JSON.parse(localStorage.getItem('retroFeudState'));if(s)state={...defaults(),...s,history:[]}}catch(e){} if(!questions.length){alert('No questions loaded. Make sure questions.js is in the same folder as index.html.');return;} state.q=Math.max(0,Math.min(questions.length-1,Number(state.q)||0)); const needed=(questions[state.q]?.a||[]).length; if(!Array.isArray(state.revealed)||state.revealed.length!==needed)state.revealed=blankReveals(state.q);}
+function bank(){return questions[state.q].a.reduce((sum,x,i)=>sum+(state.revealed[i]?x[1]:0),0)}
+function render(doSave=true){const q=questions[state.q];el('category').textContent=q.cat;el('qIndex').textContent=state.q===tieBreakerIndex?'TIE-BREAKER':'QUESTION '+String(state.q+1).padStart(2,'0')+' / '+mainQuestionCount;el('question').textContent=q.q;el('scoreA').textContent=state.scoreA;el('scoreB').textContent=state.scoreB;el('bank').textContent=bank();el('teamAName').textContent=state.teamA;el('teamBName').textContent=state.teamB;el('teamAInput').value=state.teamA;el('teamBInput').value=state.teamB;el('hostNotes').textContent=q.notes;
+ el('answerGrid').innerHTML=q.a.map((x,i)=>{const visible=audienceParam && (state.revealed[i]||state.showAll);return `<div class="answer ${visible?'revealed':'hidden-answer'}"><div class="rank">${i+1}</div><div class="ans-text">${escapeHtml(x[0])}</div><div class="pts">${x[1]}</div></div>`}).join('');
+ el('strikes').innerHTML=[0,1,2].map(i=>`<div class="strike-dot ${i<state.strikes?'on':''}">X</div>`).join('');
+ el('answerControls').innerHTML=q.a.map((x,i)=>`<button class="ans-btn ${state.revealed[i]?'done':''}" onclick="toggleReveal(${i})"><span>${i+1}</span><span>${escapeHtml(x[0])}${state.revealed[i]?' <small style="color:var(--good);font-weight:900">• REVEALED</small>':''}</span><span class="mini-pts">${x[1]}</span></button>`).join('');
+ el('revealAllBtn').textContent=state.showAll?'Hide Revealed-All Answers':'Reveal All Answers (No Score)';
+ el('questionSelect').value=state.q; if(doSave)save();}
+function escapeHtml(s){return s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function setQ(i){pushHistory();state.q=Math.max(0,Math.min(questions.length-1,i));state.revealed=blankReveals(state.q);state.showAll=false;state.strikes=0;render()}
+function tone(freq=880,dur=.11,type='sine',gain=.08){audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(gain,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+dur);o.connect(g).connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+dur)}
+function correctSound(){tone(523,.42,'triangle',.075);setTimeout(()=>tone(659,.46,'triangle',.08),220);setTimeout(()=>tone(784,.52,'triangle',.085),470);setTimeout(()=>tone(1047,.72,'triangle',.075),760)}
+let wrongAudio=null;
+function synthWrongSound(){
+ audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==='suspended')audioCtx.resume();
+ const now=audioCtx.currentTime,dur=2.85;
+ const master=audioCtx.createGain();master.gain.setValueAtTime(.001,now);master.gain.linearRampToValueAtTime(.14,now+.035);master.gain.setValueAtTime(.14,now+2.35);master.gain.exponentialRampToValueAtTime(.001,now+dur);master.connect(audioCtx.destination);
+ const o1=audioCtx.createOscillator();o1.type='sawtooth';o1.frequency.setValueAtTime(155,now);o1.frequency.exponentialRampToValueAtTime(92,now+dur);o1.connect(master);o1.start(now);o1.stop(now+dur);
+ const o2=audioCtx.createOscillator(),g2=audioCtx.createGain();o2.type='square';o2.frequency.setValueAtTime(77.5,now);o2.frequency.exponentialRampToValueAtTime(46,now+dur);g2.gain.value=.42;o2.connect(g2).connect(master);o2.start(now);o2.stop(now+dur);
+ const trem=audioCtx.createOscillator(),tg=audioCtx.createGain();trem.type='sine';trem.frequency.value=7.5;tg.gain.value=.025;trem.connect(tg).connect(master.gain);trem.start(now);trem.stop(now+dur);
+}
+function wrongSound(){
+ // Preferred: a local royalty-free MP3 named wrong-answer.mp3 in the same folder as index.html.
+ // If the file is absent or cannot play, fall back to the synthesized buzzer.
+ try{
+   if(!wrongAudio){
+     wrongAudio=new Audio('wrong-answer.mp3');
+     wrongAudio.preload='auto';
+     wrongAudio.volume=0.95;
+   }
+   wrongAudio.currentTime=0;
+   const playPromise=wrongAudio.play();
+   if(playPromise&&playPromise.catch){playPromise.catch(()=>synthWrongSound());}
+ }catch(e){synthWrongSound();}
+}
+function winnerSound(){tone(523,.42,'triangle',.07);setTimeout(()=>tone(659,.45,'triangle',.075),220);setTimeout(()=>tone(784,.48,'triangle',.08),440);setTimeout(()=>tone(1047,.7,'triangle',.08),680);setTimeout(()=>tone(1319,.95,'triangle',.07),980)}
+function toggleReveal(i){pushHistory();state.revealed[i]=!state.revealed[i]; if(state.revealed[i])correctSound();render()}
+function toggleRevealAll(){pushHistory();state.showAll=!state.showAll;render();toast(state.showAll?'All answers revealed — no points added.':'Reveal-all hidden.')}
+function showStrikeOverlay(){const x=el('strikeX');x.classList.remove('show');void x.offsetWidth;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1700)}
+function strike(){pushHistory();state.strikes=Math.min(3,state.strikes+1);wrongSound();render();if(audienceParam){showStrikeOverlay()}else if(childWin&&!childWin.closed){childWin.postMessage({type:'retro-strike'},'*')}}
+function award(team){const b=bank();if(!b){toast('Round bank is 0. Reveal an answer first.');return}pushHistory();if(team==='A')state.scoreA+=b;else state.scoreB+=b;state.revealed=blankReveals(state.q);state.showAll=false;state.strikes=0;render();toast(`${b} points awarded to ${team==='A'?state.teamA:state.teamB}`)}
+function adjust(team,n){pushHistory();if(team==='A')state.scoreA=Math.max(0,state.scoreA+n);else state.scoreB=Math.max(0,state.scoreB+n);render()}
+function undo(){const prev=state.history.pop();if(!prev){toast('Nothing to undo.');return}const hist=state.history;state={...prev,history:hist};render()}
+function resetQuestion(){if(!confirm('Reset reveals and strikes for this question?'))return;pushHistory();state.revealed=blankReveals(state.q);state.showAll=false;state.strikes=0;render()}
+function resetGame(){if(!confirm('Reset the entire game, including both team scores?'))return;state=defaults();render();toast('Game reset.')}
+function toast(msg){el('toast').textContent=msg;el('toast').classList.add('show');setTimeout(()=>el('toast').classList.remove('show'),1800)}
+let confettiFrame=null;
+function launchConfetti(){
+ const canvas=el('confettiCanvas'),ctx=canvas.getContext('2d');
+ const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=innerWidth*dpr;canvas.height=innerHeight*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);canvas.classList.add('show');
+ const colors=['#ff0b8f','#c5169a','#7b2cff','#21c7ff','#ff7a00','#ffd51f','#fff8ff'];
+ const pieces=Array.from({length:190},()=>({x:Math.random()*innerWidth,y:-20-Math.random()*innerHeight*.35,w:6+Math.random()*9,h:4+Math.random()*7,vx:-2.5+Math.random()*5,vy:3.5+Math.random()*5.5,r:Math.random()*Math.PI,vr:-.16+Math.random()*.32,c:colors[Math.floor(Math.random()*colors.length)]}));
+ const start=performance.now();
+ function frame(t){ctx.clearRect(0,0,innerWidth,innerHeight);pieces.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.025;p.r+=p.vr;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();if(p.y>innerHeight+30){p.y=-25;p.x=Math.random()*innerWidth;p.vy=3+Math.random()*4}});if(t-start<5200){confettiFrame=requestAnimationFrame(frame)}else{ctx.clearRect(0,0,innerWidth,innerHeight);canvas.classList.remove('show');confettiFrame=null}}
+ if(confettiFrame)cancelAnimationFrame(confettiFrame);confettiFrame=requestAnimationFrame(frame);
+}
+function showWinner(){
+  let team='TIE GAME', score=`${state.scoreA} - ${state.scoreB}`;
+  if(state.scoreA>state.scoreB){team=state.teamA;score=`${state.scoreA} POINTS`}
+  else if(state.scoreB>state.scoreA){team=state.teamB;score=`${state.scoreB} POINTS`}
+  const url=`winner.html?team=${encodeURIComponent(team)}&score=${encodeURIComponent(score)}&a=${state.scoreA}&b=${state.scoreB}&teamA=${encodeURIComponent(state.teamA)}&teamB=${encodeURIComponent(state.teamB)}`;
+  const w=window.open(url,'retroWinner','popup,width=1200,height=800');
+  if(!w) toast('Pop-up blocked. Please allow pop-ups for this local file.');
+}
+function hideWinner(fromRemote=false){el('winnerModal').classList.remove('open');const c=el('confettiCanvas');c.classList.remove('show');if(confettiFrame){cancelAnimationFrame(confettiFrame);confettiFrame=null}if(!fromRemote&&childWin&&!childWin.closed)childWin.postMessage({type:'retro-close-winner'},'*')}
+
+questions.forEach((q,i)=>{const o=document.createElement('option');o.value=i;o.textContent=(i===tieBreakerIndex?'Tie-Breaker':String(i+1).padStart(2,'0'))+' — '+q.cat;el('questionSelect').appendChild(o)});
+el('questionSelect').onchange=e=>setQ(+e.target.value);el('revealAllBtn').onclick=toggleRevealAll;el('prevBtn').onclick=()=>setQ(state.q-1);el('nextBtn').onclick=()=>setQ(state.q+1);el('strikeBtn').onclick=strike;el('awardA').onclick=()=>award('A');el('awardB').onclick=()=>award('B');el('plusA').onclick=()=>adjust('A',10);el('minusA').onclick=()=>adjust('A',-10);el('plusB').onclick=()=>adjust('B',10);el('minusB').onclick=()=>adjust('B',-10);el('undoBtn').onclick=undo;el('resetRoundBtn').onclick=resetQuestion;el('resetGameBtn').onclick=resetGame;el('winnerBtn').onclick=showWinner;el('closeWinner').onclick=()=>hideWinner();
+el('applyNames').onclick=()=>{pushHistory();state.teamA=el('teamAInput').value.trim()||'TEAM A';state.teamB=el('teamBInput').value.trim()||'TEAM B';render()};
+el('fullscreenBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+el('toggleHostBtn').onclick=()=>{document.body.classList.toggle('audience');el('toggleHostBtn').textContent=document.body.classList.contains('audience')?'Host View':'Audience View'};
+el('audienceBtn').onclick=()=>{childWin=window.open(location.href.split('?')[0]+'?audience=1','retroAudience','popup,width=1400,height=900');setTimeout(sendState,250)};
+window.addEventListener('keydown',e=>{if(['INPUT','SELECT'].includes(document.activeElement.tagName))return;if(e.key>='1'&&e.key<='5')toggleReveal(+e.key-1);if(e.key.toLowerCase()==='x')strike();if(e.key.toLowerCase()==='h'&&!audienceParam)el('toggleHostBtn').click();if(e.key==='ArrowRight')setQ(state.q+1);if(e.key==='ArrowLeft')setQ(state.q-1)});
+load();render(false);if(audienceParam&&window.opener)window.opener.postMessage({type:'retro-request'},'*');
+</script>
+</body>
+</html>

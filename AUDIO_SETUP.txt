@@ -1,0 +1,14 @@
+WRONG-ANSWER AUDIO SETUP
+
+The game now looks for a local file named:
+    wrong-answer.mp3
+in the same folder as index.html.
+
+Recommended royalty-free sample:
+"Wrong Answer" by Universfield on Pixabay (about 3 seconds)
+https://pixabay.com/sound-effects/film-special-effects-wrong-answer-129254/
+
+Pixabay lists it as free for use under the Pixabay Content License.
+Download the MP3 from Pixabay, rename it to wrong-answer.mp3, and place it beside index.html.
+
+If the file is missing, the game automatically falls back to its built-in synthesized buzzer.

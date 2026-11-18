@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Retro Family Feud — Game Screen</title>
+<style>
+:root{color-scheme:dark;--pink:#ff0b8f;--cyan:#21c7ff;--yellow:#ffd51f;--purple:#7b2cff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 0%,#461042 0,transparent 50%),radial-gradient(ellipse at 95% 70%,#181247 0,transparent 50%),#08030d;color:#fff8ff;font-family:Segoe UI,Arial,sans-serif}body:before{content:"";position:fixed;inset:0;background-image:radial-gradient(#ffffff24 1px,transparent 1px);background-size:28px 28px;pointer-events:none}main{position:relative;max-width:1250px;margin:auto;padding:38px 32px 48px}header{text-align:center;margin-bottom:28px}.eyebrow{color:var(--cyan);font-size:12px;letter-spacing:.3em;font-weight:900}h1{font-family:Impact,Haettenschweiler,sans-serif;font-size:clamp(40px,7vw,76px);letter-spacing:.035em;margin:10px 0;background:linear-gradient(#fff8ff 10%,#ffd51f 60%,#ff7a00);color:transparent;background-clip:text;filter:drop-shadow(0 4px 0 #701655)}header p{color:#d5bfdc;font-size:15px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.card{--accent:var(--pink);position:relative;isolation:isolate;overflow:hidden;min-height:176px;padding:24px 20px;border:2px solid var(--accent);border-radius:24px;background:linear-gradient(145deg,#341342,#160b25);color:#fff8ff;box-shadow:0 6px 0 #050208,0 0 22px #ff0b8f18;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:transform .18s,box-shadow .18s;animation:arrive .45s both;animation-delay:calc(var(--i)*35ms);font:inherit;text-align:center}.card:nth-child(even){--accent:var(--cyan)}.card:before{content:"";position:absolute;width:120px;height:120px;border:20px solid var(--accent);border-radius:50%;opacity:.07;right:-40px;top:-40px;z-index:-1}.card:hover{transform:translateY(-5px);box-shadow:0 10px 0 #050208,0 0 28px #ff0b8f40}.card:focus-visible{outline:3px solid var(--yellow);outline-offset:5px}.name{font-weight:900;font-size:clamp(18px,2.2vw,26px);line-height:1.2;overflow-wrap:anywhere}.card.selected{border-color:var(--yellow);box-shadow:0 0 30px #ffd51f40}.status:empty{display:none}.status{min-height:24px;text-align:center;color:var(--yellow);margin:24px 0 0;font-weight:700}@keyframes arrive{from{opacity:0;translate:0 16px}to{opacity:1;translate:0 0}}@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}main{padding:28px 20px}}@media(max-width:480px){.grid{grid-template-columns:1fr}.card{min-height:145px}}@media(prefers-reduced-motion:reduce){.card{animation:none;transition:none}}
+[hidden]{display:none!important}body{padding-bottom:100px}#boardView{position:relative;height:calc(100dvh - 100px)}#boardFrame{width:100%;height:100%;border:0;display:block}.dock{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:20;display:flex;gap:12px;padding:10px 16px;border:1px solid #ffffff30;border-radius:24px;background:#1b0b29f2;box-shadow:0 0 24px #ff0b8f30}.icon-btn{position:relative;width:54px;height:50px;display:grid;place-items:center;border:1px solid #ffffff24;border-radius:14px;background:#ffffff08;color:#e5cdef;cursor:pointer}.icon-btn svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.icon-btn:hover,.icon-btn[aria-current="page"]{color:var(--yellow);background:#7b2cff40;border-color:var(--pink)}.icon-btn:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}.icon-btn:after{content:attr(aria-label);position:absolute;bottom:calc(100% + 12px);padding:6px 10px;border-radius:8px;background:#08030d;color:#fff;white-space:nowrap;font-size:12px;opacity:0;pointer-events:none}.icon-btn:hover:after,.icon-btn:focus-visible:after{opacity:1}.back{position:absolute;top:12px;left:12px;z-index:10;background:#1b0b29}.back:after{top:100%;bottom:auto;left:0}.recap-scores{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:30px 0}.recap-team{border:2px solid var(--pink);border-radius:24px;padding:28px;text-align:center;background:#281039}.recap-column:nth-child(2) .recap-team{border-color:var(--cyan)}.recap-team strong{display:block;font-size:clamp(40px,8vw,80px);color:var(--yellow)}
+.recap-column{min-width:0}.awarded-categories{list-style:none;padding:0;margin:18px 0;display:grid;gap:12px}.awarded-categories li{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;border:1px solid var(--pink);border-radius:16px;background:linear-gradient(135deg,#38123e,#1b0c2b);font-size:clamp(16px,2vw,24px);font-weight:800;overflow-wrap:anywhere}.recap-column:nth-child(2) .awarded-categories li{border-color:var(--cyan)}.awarded-categories .award-points{flex-shrink:0;color:var(--yellow);font-size:18px}@media(max-width:520px){.recap-scores{gap:12px}.recap-team{padding:20px 10px}.awarded-categories li{padding:14px;flex-direction:column;gap:8px;text-align:center}}
+.view-loader{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:radial-gradient(ellipse at center,#43134c,#08030d 75%);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;pointer-events:none}.view-loader.active{opacity:1;visibility:visible;pointer-events:auto}.loader-stage{text-align:center;filter:drop-shadow(0 0 20px #ff0b8f66)}.loader-label{font-family:Impact,Haettenschweiler,sans-serif;font-size:clamp(30px,6vw,60px);letter-spacing:.08em;color:var(--yellow);margin:20px}.loader-pips{display:flex;justify-content:center;gap:14px}.loader-pips span{width:18px;height:18px;border:2px solid var(--cyan);background:var(--purple);animation:retroPulse .65s infinite alternate}.loader-pips span:nth-child(2){animation-delay:.15s;border-color:var(--pink)}.loader-pips span:nth-child(3){animation-delay:.3s;border-color:var(--yellow)}@keyframes retroPulse{to{transform:translateY(-14px) rotate(90deg);background:var(--pink);box-shadow:0 0 20px var(--pink)}}@media(prefers-reduced-motion:reduce){.view-loader{transition:none}.loader-pips span{animation:none}}
+</style>
+</head>
+<body><div class="view-loader" id="viewLoader" role="status" aria-live="polite" aria-hidden="true"><div class="loader-stage"><div class="eyebrow">RETRO FAMILY FEUD</div><div class="loader-label" id="loaderLabel">CATEGORIES</div><div class="loader-pips" aria-hidden="true"><span></span><span></span><span></span></div></div></div>
+<main id="categoryView">
+<header><div class="eyebrow">RETRO FAMILY FEUD</div><h1>PICK YOUR CATEGORY!</h1><p>Choose a throwback. Let the showdown begin.</p></header>
+<div class="grid" id="categories" aria-label="Question categories"></div>
+<p class="status" id="status" role="status" aria-live="polite"></p>
+</main>
+<section id="boardView" hidden aria-label="Question board">
+<button class="icon-btn back" id="backCategories" aria-label="Back to categories" title="Back to categories"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h15"/></svg></button>
+<iframe id="boardFrame" title="Audience question board" allow="fullscreen"></iframe>
+</section>
+<main id="recapView" hidden>
+<header><div class="eyebrow">RETRO FAMILY FEUD</div><h1>THE RECAP</h1></header>
+<div class="recap-scores">
+<div class="recap-column"><div class="recap-team"><span id="recapTeamA">TEAM A</span><strong id="recapScoreA">0</strong></div><ul class="awarded-categories" id="recapAwardsA" aria-label="Categories awarded to Team A"></ul></div>
+<div class="recap-column"><div class="recap-team"><span id="recapTeamB">TEAM B</span><strong id="recapScoreB">0</strong></div><ul class="awarded-categories" id="recapAwardsB" aria-label="Categories awarded to Team B"></ul></div>
+</div>
+</main>
+<nav class="dock" aria-label="Game views">
+<button class="icon-btn" data-view="categories" aria-label="Categories" title="Categories"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+<button class="icon-btn" data-view="board" aria-label="Question board" title="Question board"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 22h8M12 18v4M7 8h10M7 12h6"/></svg></button>
+<button class="icon-btn" data-view="recap" aria-label="Show recap" title="Show recap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v18h17M8 16v-4M13 16V7M18 16v-7"/></svg></button>
+<button class="icon-btn" id="popupWinnerBtn" aria-label="Show winner" title="Show winner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v6a4 4 0 0 1-8 0V3ZM8 5H4v3a4 4 0 0 0 4 4M16 5h4v3a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6v3"/></svg></button>
+</nav>
+<script src="questions.js"></script>
+<script src="audio-effects.js"></script>
+<script>
+const questions=window.RETRO_FEUD_QUESTIONS||[];
+const status=document.getElementById('status');
+const boardFrame=document.getElementById('boardFrame');
+let boardReady=false,pendingWinner=null;
+let viewTransitionTimer=null;
+function transitionView(view,animate){
+  clearTimeout(viewTransitionTimer);
+  const loader=document.getElementById('viewLoader');
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('loaderLabel').textContent={categories:'PICK A CATEGORY',board:'SURVEY SAYS…',recap:'THE RECAP'}[view];
+  loader.classList.toggle('active',animate);loader.setAttribute('aria-hidden',String(!animate));
+  if(animate)viewTransitionTimer=setTimeout(()=>{loader.classList.remove('active');loader.setAttribute('aria-hidden','true')},reduced?100:1400);
+}
+function deliverWinner(){
+  if(!boardReady||!pendingWinner)return;
+  boardFrame.contentWindow.postMessage({type:'retro-state',state:pendingWinner},'*');
+  boardFrame.contentWindow.postMessage({type:'retro-show-winner'},'*');
+  pendingWinner=null;
+}
+boardFrame.addEventListener('load',()=>{boardReady=true;deliverWinner()});
+document.getElementById('popupWinnerBtn').onclick=()=>{
+  RetroAudio.unlock();
+  if(!window.opener||window.opener.closed){status.textContent='Open the game window from the host panel to show the winner.';showView('categories');return}
+  showView('board',false);
+  window.opener.postMessage({type:'retro-winner-request'},'*');
+};
+function reconnectHost(){if(window.opener&&!window.opener.closed)window.opener.postMessage({type:'retro-game-ready'},'*')} 
+function showView(view,animate=true){
+  pendingWinner=null;
+  if(boardReady)boardFrame.contentWindow.postMessage({type:'retro-close-winner'},'*');
+  if(!['categories','board','recap'].includes(view))return;
+  transitionView(view,animate&&view!=='recap');
+  reconnectHost();
+  document.getElementById('categoryView').hidden=view!=='categories';
+  document.getElementById('boardView').hidden=view!=='board';
+  document.getElementById('recapView').hidden=view!=='recap';
+  document.querySelectorAll('[data-view]').forEach(button=>{if(button.dataset.view===view)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')});
+  if(view==='board'&&!boardFrame.getAttribute('src'))boardFrame.src='index.html?audience=1&embedded=1';
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>showView(button.dataset.view));
+document.getElementById('backCategories').onclick=()=>showView('categories');
+function renderRecap(state){
+  for(const team of ['A','B']){
+    const teamName=state['team'+team];
+    document.getElementById('recapTeam'+team).textContent=teamName;
+    document.getElementById('recapScore'+team).textContent=state['score'+team];
+    const list=document.getElementById('recapAwards'+team);list.replaceChildren();
+    list.setAttribute('aria-label','Categories awarded to '+teamName);
+    const totals=new Map();
+    for(const award of (state.awards||[])){
+      if(award.team!==team)continue;
+      const category=award.category||questions[award.q]?.cat;
+      if(!category)continue;
+      totals.set(category,(totals.get(category)||0)+award.points);
+    }
+    for(const [category,total] of totals){
+      const item=document.createElement('li'),name=document.createElement('span'),points=document.createElement('span');
+      name.textContent=category;points.className='award-points';points.textContent='+'+total;
+      item.append(name,points);list.append(item);
+    }
+  }
+}
+const cards=[];
+questions.forEach((q,index)=>{
+  if(q.cat==='Tie-Breaker')return;
+  const card=document.createElement('button');
+  card.className='card';card.style.setProperty('--i',index);card.type='button';card.setAttribute('aria-pressed','false');
+  const name=document.createElement('span');name.className='name';name.textContent=q.cat;
+  card.append(name);cards[index]=card;
+  card.onclick=()=>{
+    if(!window.opener||window.opener.closed){status.textContent='Open this Category Window using Show Categories in the host panel.';return}
+    status.textContent='';
+    reconnectHost();
+    window.opener.postMessage({type:'retro-category-selected',index},'*');
+  };
+  document.getElementById('categories').append(card);
+});
+let stopPopupWinnerSound=null;
+window.addEventListener('message',e=>{
+  if(e.source===boardFrame.contentWindow&&e.data?.type==='retro-winner-audio'){
+    if(stopPopupWinnerSound)stopPopupWinnerSound();stopPopupWinnerSound=null;
+    if(e.data.kind==='victory')stopPopupWinnerSound=RetroAudio.play(e.data.kind,{loop:true});
+    return;
+  }
+  if(e.source!==window.opener)return;
+  if(e.data?.type==='retro-state'){renderRecap(e.data.state);return}
+  if(e.data?.type==='retro-winner'){pendingWinner=e.data.state;deliverWinner();return}
+  if(e.data?.type==='retro-show-view'){showView(e.data.view);return}
+  if(e.data?.type!=='retro-category-ack')return;
+  const index=e.data.index;if(!cards[index])return;
+  cards.forEach((card,i)=>{card.classList.toggle('selected',i===index);card.setAttribute('aria-pressed',String(i===index))});
+  status.textContent='';
+  showView('board');
+});
+showView(new URLSearchParams(location.search).get('view')||'categories');
+window.addEventListener('focus',reconnectHost);
+window.addEventListener('pageshow',reconnectHost);
+window.addEventListener('storage',e=>{if(e.key==='retroFeudState')reconnectHost()});
+if(!questions.length)status.textContent='No categories found. Check that questions.js is available.';
+</script>
+</body>
+</html>

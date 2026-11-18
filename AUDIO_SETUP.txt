@@ -12,3 +12,16 @@ Pixabay lists it as free for use under the Pixabay Content License.
 Download the MP3 from Pixabay, rename it to wrong-answer.mp3, and place it beside index.html.
 
 If the file is missing, the game automatically falls back to its built-in synthesized buzzer.
+
+CORRECT ANSWERS AND WINNER EFFECTS
+Optional files beside index.html:
+    correct-answer.mp3  - answers ranked 2 and below
+    top-answer.mp3      - the #1 answer (special fanfare)
+    victory.mp3         - winner celebration
+
+All three effects have built-in synthesized fallbacks, so no downloads are required.
+Hiding an answer and Reveal All do not play correct-answer sounds.
+The winner appears immediately with confetti, spotlights, and victory audio.
+If the browser blocks popup audio, click inside the question board before starting the reveal.
+Winner confetti and victory audio loop until you close the winner display or switch views.
+The victory.mp3 file plays to its end and repeats; the built-in fanfare also loops if the file is missing.

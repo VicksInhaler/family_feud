@@ -8,7 +8,7 @@ HOW TO RUN
 4. Keep the main window on the host laptop for answer reveals, strikes, scoring, undo, and round selection.
 
 UPDATED CONTENT
-- 12 selectable main questions plus 1 tie-breaker.
+- 8 selectable main questions plus 1 tie-breaker.
 - Added "80s–90s Date Venues": Cinema/Movie Theater, Disco/Dance Club, Zoo, Museum, Library.
 - Added "Geek Throwback": COBOL, Pascal, FORTRAN, BASIC, Ada.
 - All answer-board scores are simulated survey scores for entertainment, not actual survey data.

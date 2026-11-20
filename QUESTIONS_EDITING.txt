@@ -10,10 +10,10 @@ Each question looks like this:
  {cat:'Retro Gadgets',
   q:'Name a gadget people commonly used before smartphones became popular.',
   a:[
-    ['Nokia / Basic Cellphone',30],
-    ['MP3 Player / iPod',24],
-    ['Digital Camera',19],
-    ['Portable CD Player / Discman',15],
+    ['Game and Watch',30],
+    ['Game Boy',24],
+    ['Walkman / Discman',19],
+    ['Family Computer / Atari',15],
     ['Pager / Beeper',12]
   ],
   notes:'Accepted alternatives / host notes here.'},
@@ -37,3 +37,16 @@ in the same folder as index.html.
 
 WINNER PAGE
 Keep winner.html in the same folder as index.html.
+
+PRELIMINARY QUESTIONS
+Edit preliminary-questions.js to change the one-answer questions shown before category selection.
+Each entry uses q for the question and a for its answer. The seven questions cycle in order.
+In the host panel, reveal the answer, then click Correct - Pick Category to unlock the cards.
+Selecting a category consumes the unlock and advances to the next preliminary question.
+Preliminary questions do not add points. Progress is saved, supports Undo, and clears on Reset Entire Game.
+QUICK FIRE LANDING
+Each Quick Fire starts with the Retro Family Feud logo. Use Show Question, then Reveal Answer, then Correct - Pick Category in the host panel.
+Use Quick Fire Landing to return to the logo and hide the current question/answer.
+
+ONE PICK PER CATEGORY
+Picked categories stay disabled, including after Undo or refreshing the windows. Only Reset Entire Game makes them available again.

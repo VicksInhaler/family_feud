@@ -103,6 +103,17 @@ button{border:0;color:var(--white);cursor:pointer}
 
     <aside class="host" id="hostPanel">
       <div class="host-card">
+        <h3>Preliminary Question</h3>
+        <div class="control-grid">
+          <select class="select wide" id="preQuestionSelect" aria-label="Preliminary question"></select>
+          <div class="host-notes wide">Answer: <strong id="preHostAnswer"></strong></div>
+          <button class="btn ghost" id="showPreLanding">Quick Fire Landing</button><button class="btn cyan" id="showPreQuestion">Show Question</button>
+          <button class="btn" id="revealPreAnswer">Reveal Answer</button>
+          <button class="btn hot" id="allowCategories">Correct — Pick Category</button>
+        </div>
+        <p class="small" id="preHostStatus">Reveal the answer, then confirm a correct response to unlock categories. No points are added.</p>
+      </div>
+      <div class="host-card">
         <h2>HOST CONTROL PANEL</h2>
         <div class="control-grid">
           <button class="btn hot wide" id="categoriesBtn">Show Categories</button>
@@ -127,18 +138,25 @@ button{border:0;color:var(--white);cursor:pointer}
 <div class="modal" id="winnerModal" role="dialog" aria-label="Winner celebration"><div class="winner-lights" aria-hidden="true"></div><div class="modal-card"><div class="score-label" style="text-align:center">AND THE WINNER IS…</div><div class="winner" id="winnerText">TEAM A</div><div style="text-align:center;font-size:22px;font-weight:900" id="winnerScore"></div><div style="text-align:center;margin-top:18px"><button class="btn hot" id="closeWinner">Back to Game</button></div></div></div>
 <canvas id="confettiCanvas" aria-hidden="true"></canvas>
 <script src="questions.js"></script>
+<script src="preliminary-questions.js"></script>
 <script src="audio-effects.js"></script>
 <script>
 const questions=window.RETRO_FEUD_QUESTIONS || [];
+const preliminaryQuestions=window.RETRO_PRELIMINARY_QUESTIONS||[];
 
 const mainQuestionCount=questions.length-1;
 const tieBreakerIndex=questions.length-1;
 const blankReveals=(qIndex=0)=>Array((questions[qIndex]?.a||[]).length).fill(false);
-const defaults=()=>({q:0,revealed:blankReveals(0),showAll:false,strikes:0,scoreA:0,scoreB:0,teamA:'TEAM A',teamB:'TEAM B',awards:[],history:[]});
+const defaults=()=>({q:0,revealed:blankReveals(0),showAll:false,strikes:0,scoreA:0,scoreB:0,teamA:'TEAM A',teamB:'TEAM B',awards:[],usedCategories:[],preQ:0,preVisible:false,preRevealed:false,categoryUnlocked:false,roundStarted:false,history:[]});
 let state=defaults(); let childWin=null; let categoryWin=null; let audioCtx=null;
 const el=id=>document.getElementById(id); const audienceParam=new URLSearchParams(location.search).get('audience')==='1';
 const hostWindow=audienceParam?(window.parent!==window?window.parent.opener:window.opener):null;
 if(audienceParam) document.body.classList.add('audience');
+function usedCategoryIndices(){
+  const used=Array.isArray(state.usedCategories)?state.usedCategories:[];
+  const awarded=(state.awards||[]).map(award=>questions.findIndex(question=>question.cat===award.category));
+  return [...new Set([...used,...awarded,...(state.roundStarted?[state.q]:[])])].filter(index=>Number.isInteger(index)&&index>=0&&index<questions.length);
+}
 function snapshot(){return JSON.parse(JSON.stringify({...state,history:[]}));}
 function pushHistory(){state.history.push(snapshot()); if(state.history.length>50)state.history.shift();}
 function sendState(){ if(categoryWin&&!categoryWin.closed)categoryWin.postMessage({type:'retro-state',state:snapshot()},'*'); if(childWin && !childWin.closed) childWin.postMessage({type:'retro-state',state:snapshot()},'*'); if(hostWindow) hostWindow.postMessage({type:'retro-request'},'*'); }
@@ -154,7 +172,8 @@ window.addEventListener('message',e=>{
   if(e.data?.type==='retro-category-selected'){
     const i=e.data.index;
     if(!Number.isInteger(i)||i<0||i>=questions.length)return;
-    setQ(i);
+    if(!preliminaryQuestions.length||!state.categoryUnlocked){categoryWin.postMessage({type:'retro-show-view',view:'preliminary'},'*');toast('Complete the preliminary question before picking a category.');return}
+    if(!setQ(i,true)){sendState();categoryWin.postMessage({type:'retro-category-rejected',reason:'That category has already been picked. Choose another category.'},'*');return}
     categoryWin.postMessage({type:'retro-category-ack',index:i},'*');
   }
 });
@@ -177,9 +196,46 @@ function render(doSave=true){const q=questions[state.q];el('category').textConte
  el('strikes').innerHTML=[0,1,2].map(i=>`<div class="strike-dot ${i<state.strikes?'on':''}">X</div>`).join('');
  el('answerControls').innerHTML=q.a.map((x,i)=>`<button class="ans-btn ${state.revealed[i]?'done':''}" onclick="toggleReveal(${i})"><span>${i+1}</span><span>${escapeHtml(x[0])}${state.revealed[i]?' <small style="color:var(--good);font-weight:900">• REVEALED</small>':''}</span><span class="mini-pts">${x[1]}</span></button>`).join('');
  el('revealAllBtn').textContent=state.showAll?'Hide Revealed-All Answers':'Reveal All Answers (No Score)';
- el('questionSelect').value=state.q; if(doSave)save();}
+ state.usedCategories=usedCategoryIndices();Array.from(el('questionSelect').options).forEach(option=>option.disabled=state.usedCategories.includes(Number(option.value)));el('questionSelect').value=state.q;renderPreliminaryHost(); if(doSave)save();}
+function renderPreliminaryHost(){
+  state.preQ=Math.max(0,Math.min(preliminaryQuestions.length-1,Number(state.preQ)||0));
+  const question=preliminaryQuestions[state.preQ];
+  el('preQuestionSelect').value=state.preQ;
+  el('preHostAnswer').textContent=question?.a||'No preliminary questions loaded';
+  el('revealPreAnswer').disabled=!question||!state.preVisible||state.preRevealed;
+  el('allowCategories').disabled=!question||!state.preVisible||!state.preRevealed||state.categoryUnlocked;
+  el('preHostStatus').textContent=state.categoryUnlocked?'Categories unlocked. Pick one in the game window.':(state.preVisible?'Reveal the answer, then confirm a correct response to unlock categories. No points are added.':'The logo landing screen is ready. Click Show Question to begin Quick Fire.');
+}
+preliminaryQuestions.forEach((question,index)=>{
+  const option=document.createElement('option');option.value=index;option.textContent=`${index+1}. ${question.q}`;el('preQuestionSelect').append(option);
+});
+el('preQuestionSelect').onchange=e=>{
+  pushHistory();state.preQ=Number(e.target.value);state.preVisible=false;state.preRevealed=false;state.categoryUnlocked=false;render();
+  if(categoryWin&&!categoryWin.closed)categoryWin.postMessage({type:'retro-show-view',view:'preliminary'},'*');
+};
+el('showPreLanding').onclick=()=>{
+  pushHistory();state.preVisible=false;state.preRevealed=false;state.categoryUnlocked=false;render();openGameWindow('landing');
+};
+el('showPreQuestion').onclick=()=>{
+  pushHistory();state.preVisible=true;state.preRevealed=false;state.categoryUnlocked=false;render();openGameWindow('preliminary');
+};
+el('revealPreAnswer').onclick=()=>{
+  if(!state.preVisible||state.preRevealed||!preliminaryQuestions[state.preQ])return;
+  pushHistory();state.preRevealed=true;correctSound();render();openGameWindow('preliminary');
+};
+el('allowCategories').onclick=()=>{
+  if(!state.preVisible||!state.preRevealed||state.categoryUnlocked)return;
+  pushHistory();state.categoryUnlocked=true;render();openGameWindow('categories');
+};
 function escapeHtml(s){return s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-function setQ(i){pushHistory();state.q=Math.max(0,Math.min(questions.length-1,i));state.revealed=blankReveals(state.q);state.showAll=false;state.strikes=0;render()}
+function setQ(i,fromCategory=false){
+  const index=Math.max(0,Math.min(questions.length-1,i));
+  const used=usedCategoryIndices();
+  if(used.includes(index)){toast('That category has already been picked. Reset Entire Game to use it again.');el('questionSelect').value=state.q;return false}
+  pushHistory();state.usedCategories=[...used,index];state.roundStarted=true;
+  if(fromCategory){state.categoryUnlocked=false;state.preVisible=false;state.preRevealed=false;state.preQ=(state.preQ+1)%preliminaryQuestions.length}
+  state.q=index;state.revealed=blankReveals(index);state.showAll=false;state.strikes=0;render();return true;
+}
 function tone(freq=880,dur=.11,type='sine',gain=.08){audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(gain,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+dur);o.connect(g).connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+dur)}
 function playEffect(kind){return RetroAudio.play(kind)}
 function playWinnerEffect(kind){
@@ -219,7 +275,7 @@ function showStrikeOverlay(){const x=el('strikeX');x.classList.remove('show');vo
 function strike(){pushHistory();state.strikes=Math.min(3,state.strikes+1);wrongSound();render();if(audienceParam){showStrikeOverlay()}else if(childWin&&!childWin.closed){childWin.postMessage({type:'retro-strike'},'*')}}
 function award(team){const b=bank();if(!b){toast('Round bank is 0. Reveal an answer first.');return}pushHistory();if(!Array.isArray(state.awards))state.awards=[];state.awards.push({q:state.q,category:questions[state.q].cat,team,points:b});if(team==='A')state.scoreA+=b;else state.scoreB+=b;state.revealed=blankReveals(state.q);state.showAll=false;state.strikes=0;render();toast(`${b} points awarded to ${team==='A'?state.teamA:state.teamB}`)}
 function adjust(team,n){pushHistory();if(team==='A')state.scoreA=Math.max(0,state.scoreA+n);else state.scoreB=Math.max(0,state.scoreB+n);render()}
-function undo(){const prev=state.history.pop();if(!prev){toast('Nothing to undo.');return}const hist=state.history;state={...prev,history:hist};render()}
+function undo(){const prev=state.history.pop();if(!prev){toast('Nothing to undo.');return}const hist=state.history;const used=usedCategoryIndices();state={...prev,usedCategories:[...new Set([...used,...(prev.usedCategories||[])])],history:hist};render()}
 function resetQuestion(){if(!confirm('Reset reveals and strikes for this question?'))return;pushHistory();state.revealed=blankReveals(state.q);state.showAll=false;state.strikes=0;render()}
 function resetGame(){if(!confirm('Reset the entire game, including both team scores?'))return;state=defaults();render();toast('Game reset.')}
 function toast(msg){el('toast').textContent=msg;el('toast').classList.add('show');setTimeout(()=>el('toast').classList.remove('show'),1800)}

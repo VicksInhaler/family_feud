@@ -1,36 +1,20 @@
-
-// Retro Family Feud question bank
-// Edit this file with Notepad, save it, then refresh index.html.
-//
-// Format for each question:
-// {
-//   cat: 'Category',
-//   q: 'Question text',
-//   a: [['Answer 1', 30], ['Answer 2', 25], ['Answer 3', 20], ['Answer 4', 15], ['Answer 5', 10]],
-//   notes: 'Host notes / accepted alternatives'
-// }
-//
-// Keep the final entry as cat: 'Tie-Breaker' if you want the game
-// to treat it as the tie-breaker.
-//
-// Scores are simulated survey scores.
-// Recommended: keep each question total at 100.
-
+// Retro Family Feud question bank: 8 regular rounds + 1 tie-breaker.
+// Edit this file, save it, then refresh the host and game window.
+// Each a entry is [answer, points]. Keep the tie-breaker last.
+// Scores are simulated survey scores; each round totals 100 points.
 window.RETRO_FEUD_QUESTIONS = [
-
   {
     cat: 'Retro Gadgets',
     q: 'Name a gadget people commonly used before smartphones became popular.',
     a: [
-      ['Nokia / Basic Cellphone', 30],
-      ['MP3 Player / iPod', 24],
-      ['Digital Camera', 19],
-      ['Portable CD Player / Discman', 15],
+      ['Game and Watch', 30],
+      ['Game Boy', 24],
+      ['Walkman / Discman', 19],
+      ['Family Computer / Atari', 15],
       ['Pager / Beeper', 12]
     ],
-    notes: 'Accept keypad phone or feature phone for basic cellphone. Accept music player for MP3/iPod, digicam for Digital Camera, and beeper for Pager.'
+    notes: 'Accept Game & Watch for Game and Watch. Accept either Walkman or Discman, either Family Computer or Atari, and either pager or beeper for their respective answers.'
   },
-
   {
     cat: 'Filipino Street Games',
     q: 'Name a game Filipino kids commonly played outside before mobile games became popular.',
@@ -43,7 +27,6 @@ window.RETRO_FEUD_QUESTIONS = [
     ],
     notes: 'Accept tagu-taguan for Hide-and-Seek, hopscotch for Piko, and either Luksong Tinik or Luksong Baka for rank 5.'
   },
-
   {
     cat: 'Movie Night',
     q: 'Name something people used for movie night at home before streaming services.',
@@ -52,11 +35,10 @@ window.RETRO_FEUD_QUESTIONS = [
       ['DVD Player', 25],
       ['Cable TV', 19],
       ['VCD Player', 16],
-      ['Video Rental Store', 12]
+      ['Laser Disc', 12]
     ],
-    notes: 'Accept videotape or video player for VHS/VCR, DVD for DVD Player, and Video City or rental shop for Video Rental Store.'
+    notes: 'Accept videotape or video player for VHS/VCR, DVD for DVD Player, and LaserDisc or LD for Laser Disc.'
   },
-
   {
     cat: 'Keeping in Touch',
     q: 'Name a way people kept in touch with friends before chat apps and social media.',
@@ -65,50 +47,46 @@ window.RETRO_FEUD_QUESTIONS = [
       ['Text / SMS', 25],
       ['Handwritten Letters', 18],
       ['Pager / Beeper', 15],
-      ['Payphone', 12]
+      ['Telegram', 12]
     ],
-    notes: 'Accept home phone or telephone for Landline, texting for SMS, letters/notes/snail mail together, and public phone for Payphone.'
+    notes: 'Accept home phone for Landline, texting for SMS, letters or snail mail for Handwritten Letters, and either pager or beeper. Telegram refers to the traditional message service.'
   },
-
   {
     cat: 'Cartoons & Anime',
     q: 'Name a cartoon or anime many kids in the Philippines watched in the 1990s or early 2000s.',
     a: [
       ['Dragon Ball Z', 28],
-      ['Pokémon', 24],
+      ['Ghost Fighter', 24],
       ['Sailor Moon', 19],
-      ['Tom and Jerry', 16],
-      ['Doraemon', 13]
+      ['Voltes V', 16],
+      ['Bio Man', 13]
     ],
-    notes: 'Accept Dragon Ball for Dragon Ball Z and Pokemon without the accent. Treat this as a nostalgia question rather than strict trivia.'
+    notes: 'Accept Dragon Ball for Dragon Ball Z, Yu Yu Hakusho for Ghost Fighter, and Bioman for Bio Man. Use the supplied nostalgia survey answers.'
   },
-
   {
     cat: 'Classic Pinoy Dating Spots',
-    q: 'Name a popular place where Filipino couples would go on dates back in the 1980s or 1990s.',
+    q: 'Name a popular place where Filipino couples would go on date back in the 1980s or 1990s.',
     a: [
-      ['Luneta Park / Rizal Park', 30],
+      ['Park / Luneta Park', 30],
       ['Movie Theater / Sinehan', 25],
-      ['Disco / Dance Club', 20],
-      ['Manila Bay / Roxas Boulevard', 15],
-      ['Carnival / Fiesta', 10]
+      ['Disco', 20],
+      ['Fast food Chain', 15],
+      ['Carnival / Perya', 10]
     ],
-    notes: 'Accept Rizal Park for Luneta, cinema for Movie Theater, discotheque or nightclub for Disco, Roxas Boulevard or Manila Bay sunset viewing for Manila Bay, and perya or amusement fair for Carnival. Simulated survey scores only.'
+    notes: 'Accept park, Luneta or Rizal Park for rank 1; cinema or sinehan for rank 2; disco or discotheque for rank 3; a fast-food chain for rank 4; and carnival or perya for rank 5.'
   },
-
   {
     cat: 'Geek Throwback',
-    q: 'Name an old-school programming language associated with earlier generations of computing.',
+    q: 'Name a popular programming language used by developers in the 1980s or 1990s.',
     a: [
-      ['COBOL', 30],
-      ['Pascal', 24],
-      ['FORTRAN', 19],
-      ['BASIC', 15],
-      ['Ada', 12]
+      ['C', 30],
+      ['Fortran', 25],
+      ['BASIC / Visual Basic', 20],
+      ['Pascal', 15],
+      ['COBOL', 10]
     ],
-    notes: 'This is intentionally a harder, less-common-answer question. Accept Visual Basic only if the host wants to count it under BASIC; otherwise keep BASIC as the intended answer. Simulated survey scores only.'
+    notes: 'Accept ANSI C for C, either BASIC or Visual Basic for rank 3, and Turbo Pascal for Pascal. Capitalization does not matter.'
   },
-
   {
     cat: 'Everyday Struggles',
     q: "Name something you wouldn't want to step on while wearing socks.",
@@ -119,34 +97,18 @@ window.RETRO_FEUD_QUESTIONS = [
       ['Spilled Food / Sauce', 12],
       ['Chewing Gum', 8]
     ],
-    notes: 'Accept puddle or wet tiles for Wet Floor, dog poop or animal waste for Poop, muddy ground for Mud, ketchup or gravy for Spilled Food, and bubble gum for Chewing Gum. Simulated survey scores only.'
+    notes: 'Accept puddle or wet tiles for Wet Floor, dog poop or animal waste for Poop, muddy ground for Mud, ketchup or gravy for Spilled Food, and bubble gum for Chewing Gum.'
   },
-
-{
-  cat: 'Geek Throwback',
-  q: 'Name a popular programming language used in the 1980s or 1990s.',
-  a: [
-    ['COBOL', 30],
-    ['Pascal', 24],
-    ['FORTRAN', 19],
-    ['BASIC', 15],
-    ['C', 12]
-  ],
-  notes: 'Accept Turbo Pascal for Pascal, Visual Basic or QBASIC for BASIC, and ANSI C for C. Simulated survey scores only.'
-},
-
-
   {
     cat: 'Tie-Breaker',
-    q: 'Name something you might have seen in a typical 1990s living room.',
+    q: 'Name Pop Icon during 80s to 2000s.',
     a: [
-      ['CRT / Box-Type Television', 33],
-      ['VHS / VCR', 24],
-      ['Stereo / Radio', 18],
-      ['Landline Telephone', 15],
-      ['Video Game Console', 10]
+      ['Michael Jordan', 33],
+      ['Madonna', 24],
+      ['Prince', 18],
+      ['Britney Spears', 15],
+      ['Spice Girls', 10]
     ],
-    notes: 'Tie-breaker: one answer per representative. Higher-ranked answer wins. Use only if total scores are equal.'
+    notes: 'Tie-breaker: one answer per representative. Higher-ranked answer wins. Use only if total scores are equal. Use the supplied answers and rankings.'
   }
-
 ];

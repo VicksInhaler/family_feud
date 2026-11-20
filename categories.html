@@ -10,10 +10,26 @@
 [hidden]{display:none!important}body{padding-bottom:100px}#boardView{position:relative;height:calc(100dvh - 100px)}#boardFrame{width:100%;height:100%;border:0;display:block}.dock{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:20;display:flex;gap:12px;padding:10px 16px;border:1px solid #ffffff30;border-radius:24px;background:#1b0b29f2;box-shadow:0 0 24px #ff0b8f30}.icon-btn{position:relative;width:54px;height:50px;display:grid;place-items:center;border:1px solid #ffffff24;border-radius:14px;background:#ffffff08;color:#e5cdef;cursor:pointer}.icon-btn svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.icon-btn:hover,.icon-btn[aria-current="page"]{color:var(--yellow);background:#7b2cff40;border-color:var(--pink)}.icon-btn:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}.icon-btn:after{content:attr(aria-label);position:absolute;bottom:calc(100% + 12px);padding:6px 10px;border-radius:8px;background:#08030d;color:#fff;white-space:nowrap;font-size:12px;opacity:0;pointer-events:none}.icon-btn:hover:after,.icon-btn:focus-visible:after{opacity:1}.back{position:absolute;top:12px;left:12px;z-index:10;background:#1b0b29}.back:after{top:100%;bottom:auto;left:0}.recap-scores{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:30px 0}.recap-team{border:2px solid var(--pink);border-radius:24px;padding:28px;text-align:center;background:#281039}.recap-column:nth-child(2) .recap-team{border-color:var(--cyan)}.recap-team strong{display:block;font-size:clamp(40px,8vw,80px);color:var(--yellow)}
 .recap-column{min-width:0}.awarded-categories{list-style:none;padding:0;margin:18px 0;display:grid;gap:12px}.awarded-categories li{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;border:1px solid var(--pink);border-radius:16px;background:linear-gradient(135deg,#38123e,#1b0c2b);font-size:clamp(16px,2vw,24px);font-weight:800;overflow-wrap:anywhere}.recap-column:nth-child(2) .awarded-categories li{border-color:var(--cyan)}.awarded-categories .award-points{flex-shrink:0;color:var(--yellow);font-size:18px}@media(max-width:520px){.recap-scores{gap:12px}.recap-team{padding:20px 10px}.awarded-categories li{padding:14px;flex-direction:column;gap:8px;text-align:center}}
 .view-loader{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:radial-gradient(ellipse at center,#43134c,#08030d 75%);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;pointer-events:none}.view-loader.active{opacity:1;visibility:visible;pointer-events:auto}.loader-stage{text-align:center;filter:drop-shadow(0 0 20px #ff0b8f66)}.loader-label{font-family:Impact,Haettenschweiler,sans-serif;font-size:clamp(30px,6vw,60px);letter-spacing:.08em;color:var(--yellow);margin:20px}.loader-pips{display:flex;justify-content:center;gap:14px}.loader-pips span{width:18px;height:18px;border:2px solid var(--cyan);background:var(--purple);animation:retroPulse .65s infinite alternate}.loader-pips span:nth-child(2){animation-delay:.15s;border-color:var(--pink)}.loader-pips span:nth-child(3){animation-delay:.3s;border-color:var(--yellow)}@keyframes retroPulse{to{transform:translateY(-14px) rotate(90deg);background:var(--pink);box-shadow:0 0 20px var(--pink)}}@media(prefers-reduced-motion:reduce){.view-loader{transition:none}.loader-pips span{animation:none}}
+.pre-stage{position:relative;overflow:hidden;text-align:center;margin:40px auto;max-width:1000px;padding:clamp(24px,5vw,64px);border:2px solid var(--pink);border-radius:28px;background:linear-gradient(145deg,#341342,#160b25);box-shadow:0 0 45px #ff0b8f28,inset 0 0 60px #7b2cff15}.pre-chip{display:inline-block;padding:9px 16px;border-radius:12px;background:#21c7ff15;color:var(--cyan);font-weight:900;letter-spacing:.14em;font-size:12px}#preQuestionText{font-size:clamp(25px,4vw,46px);line-height:1.25;margin:30px 0 40px}.pre-answer{min-height:100px;display:grid;place-items:center;border:2px solid #ffd51f55;border-radius:18px;background:#08030d88;color:#ffd51f88;font-family:Impact,Haettenschweiler,sans-serif;font-size:clamp(36px,6vw,70px);padding:20px;overflow-wrap:anywhere}.pre-answer.revealed{color:var(--yellow);border-color:var(--yellow);box-shadow:0 0 28px #ffd51f22;animation:arrive .35s both}.card:disabled{cursor:default}
+.quick-landing{min-height:calc(100dvh - 100px);display:flex;flex-direction:column;align-items:center;justify-content:center;isolation:isolate;overflow:hidden}.landing-halo{position:absolute;width:min(680px,85vw);aspect-ratio:1;border-radius:50%;border:2px solid #21c7ff55;box-shadow:0 0 70px #ff0b8f22,inset 0 0 70px #7b2cff22;transform:scaleY(.78);z-index:-1}.retro-logo{text-align:center;transform:rotate(-4deg);padding:30px;filter:drop-shadow(0 10px 0 #280a35) drop-shadow(0 0 28px #ff0b8f44);font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;line-height:.9}.logo-retro{font-family:Segoe UI,Arial,sans-serif;font-size:clamp(18px,3vw,32px);font-weight:900;letter-spacing:.5em;color:var(--cyan);padding-left:.5em;margin-bottom:20px}.logo-family{font-size:clamp(64px,12vw,145px);letter-spacing:.04em;color:#fff8ff;text-shadow:4px 4px 0 #7b2cff}.logo-feud{font-size:clamp(94px,18vw,215px);letter-spacing:.04em;background:linear-gradient(#fff8cf 8%,#ffd51f 50%,#ff7a00 90%);color:transparent;background-clip:text;-webkit-background-clip:text;filter:drop-shadow(4px 5px 0 #ff0b8f)}
+.card.picked{opacity:.38;filter:grayscale(.8);border-style:dashed;box-shadow:none}.card.picked:hover{transform:none;box-shadow:none}.card.picked:after{content:'PICKED';font-size:11px;letter-spacing:.18em;color:#d5bfdc;font-weight:900}
+.retro-logo{transform:perspective(900px) rotate(-4deg) rotateX(var(--tilt-y,0deg)) rotateY(var(--tilt-x,0deg));animation:logoFloat 5s ease-in-out infinite;transition:transform .35s ease-out,scale .35s,filter .35s;will-change:transform}.retro-logo:hover{scale:1.035;filter:drop-shadow(0 12px 0 #280a35) drop-shadow(0 0 45px #ff0b8f88)}.landing-halo{animation:haloGlow 4s ease-in-out infinite alternate}.landing-halo:before,.landing-halo:after{content:"";position:absolute;inset:20px;border-radius:50%;border:2px dashed #ff0b8f66;animation:orbitRing 38s linear infinite}.landing-halo:after{inset:-22px;border:1px dashed #21c7ff44;animation-direction:reverse;animation-duration:48s}.logo-feud{background-size:100% 180%;animation:goldShimmer 5s ease-in-out infinite alternate}.quick-landing:before{content:"";position:absolute;inset:7%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 12% 25%,#21c7ffbb 0 2px,transparent 3px),radial-gradient(circle at 85% 20%,#ffd51faa 0 2px,transparent 3px),radial-gradient(circle at 20% 80%,#ff0b8faa 0 3px,transparent 4px),radial-gradient(circle at 88% 72%,#21c7ff99 0 2px,transparent 3px);animation:starDrift 7s ease-in-out infinite alternate}@keyframes logoFloat{0%,100%{translate:0 6px}50%{translate:0 -12px}}@keyframes haloGlow{from{opacity:.55;box-shadow:0 0 50px #ff0b8f22,inset 0 0 50px #7b2cff22}to{opacity:1;box-shadow:0 0 95px #21c7ff33,inset 0 0 80px #ff0b8f22}}@keyframes orbitRing{to{rotate:360deg}}@keyframes goldShimmer{from{background-position:0 0}to{background-position:0 100%}}@keyframes starDrift{from{translate:0 10px;opacity:.35}to{translate:0 -15px;opacity:1}}@media(prefers-reduced-motion:reduce){.retro-logo,.logo-feud,.landing-halo,.landing-halo:before,.landing-halo:after,.quick-landing:before{animation:none!important;transition:none!important}.retro-logo,.retro-logo:hover{transform:rotate(-4deg);translate:none;scale:1}}
+.landing-stage-lights{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1}.stage-beam{position:absolute;top:-8%;width:55%;height:130%;transform-origin:50% 0;clip-path:polygon(48% 0,52% 0,100% 100%,0 100%);mix-blend-mode:screen;opacity:.55;filter:blur(8px);animation:stageSweep 9s ease-in-out infinite alternate}.beam-pink{left:-10%;background:linear-gradient(180deg,#fff3, #ff0b8f35 35%,#ff0b8f00 95%);--beam-start:-24deg;--beam-end:28deg}.beam-cyan{right:-10%;background:linear-gradient(180deg,#fff3,#21c7ff35 35%,#21c7ff00 95%);--beam-start:24deg;--beam-end:-28deg;animation-delay:-4.5s}.stage-wash{position:absolute;inset:0;background:radial-gradient(ellipse at 12% 8%,#ff0b8f44,transparent 45%),radial-gradient(ellipse at 88% 8%,#21c7ff44,transparent 45%);animation:stageWash 6s ease-in-out infinite alternate}.landing-bulbs{position:absolute;width:min(720px,90vw);aspect-ratio:1;transform:scaleY(.78);pointer-events:none;z-index:-1}.landing-bulbs span{--bulb-color:#ff0b8f;position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:var(--bulb-color);box-shadow:0 0 8px var(--bulb-color),0 0 20px var(--bulb-color);transform:rotate(var(--bulb-angle)) translateY(clamp(140px,31vw,355px));animation:marqueeGlow 3s ease-in-out infinite;animation-delay:var(--bulb-delay)}.landing-bulbs span:nth-child(even){--bulb-color:#21c7ff}.landing-bulbs span:nth-child(3n){--bulb-color:#ffd51f}@keyframes stageSweep{from{transform:rotate(var(--beam-start))}to{transform:rotate(var(--beam-end))}}@keyframes stageWash{from{opacity:.45}to{opacity:1}}@keyframes marqueeGlow{0%,100%{opacity:.35}50%{opacity:1;box-shadow:0 0 12px var(--bulb-color),0 0 30px var(--bulb-color)}}@media(prefers-reduced-motion:reduce){.stage-beam,.stage-wash,.landing-bulbs span{animation:none}.stage-beam{transform:rotate(0deg)}.landing-bulbs span{opacity:.7}}
 </style>
 </head>
 <body><div class="view-loader" id="viewLoader" role="status" aria-live="polite" aria-hidden="true"><div class="loader-stage"><div class="eyebrow">RETRO FAMILY FEUD</div><div class="loader-label" id="loaderLabel">CATEGORIES</div><div class="loader-pips" aria-hidden="true"><span></span><span></span><span></span></div></div></div>
-<main id="categoryView">
+<main id="landingView" class="quick-landing">
+<div class="landing-stage-lights" aria-hidden="true"><div class="stage-beam beam-pink"></div><div class="stage-beam beam-cyan"></div><div class="stage-wash"></div></div><div class="landing-bulbs" aria-hidden="true"><span style="--bulb-angle:0deg;--bulb-delay:0ms"></span><span style="--bulb-angle:18deg;--bulb-delay:120ms"></span><span style="--bulb-angle:36deg;--bulb-delay:240ms"></span><span style="--bulb-angle:54deg;--bulb-delay:360ms"></span><span style="--bulb-angle:72deg;--bulb-delay:480ms"></span><span style="--bulb-angle:90deg;--bulb-delay:600ms"></span><span style="--bulb-angle:108deg;--bulb-delay:720ms"></span><span style="--bulb-angle:126deg;--bulb-delay:840ms"></span><span style="--bulb-angle:144deg;--bulb-delay:960ms"></span><span style="--bulb-angle:162deg;--bulb-delay:1080ms"></span><span style="--bulb-angle:180deg;--bulb-delay:1200ms"></span><span style="--bulb-angle:198deg;--bulb-delay:1320ms"></span><span style="--bulb-angle:216deg;--bulb-delay:1440ms"></span><span style="--bulb-angle:234deg;--bulb-delay:1560ms"></span><span style="--bulb-angle:252deg;--bulb-delay:1680ms"></span><span style="--bulb-angle:270deg;--bulb-delay:1800ms"></span><span style="--bulb-angle:288deg;--bulb-delay:1920ms"></span><span style="--bulb-angle:306deg;--bulb-delay:2040ms"></span><span style="--bulb-angle:324deg;--bulb-delay:2160ms"></span><span style="--bulb-angle:342deg;--bulb-delay:2280ms"></span></div>
+<div class="landing-halo" aria-hidden="true"></div>
+<div class="retro-logo" role="img" aria-label="Retro Family Feud">
+<div class="logo-retro">RETRO</div><div class="logo-family">FAMILY</div><div class="logo-feud">FEUD</div>
+</div>
+</main>
+<main id="preliminaryView" hidden>
+<header><div class="eyebrow">RETRO FAMILY FEUD</div><h1>QUICK FIRE!</h1><p>Answer first. Earn your category pick.</p></header>
+<div class="pre-stage"><div class="pre-chip" id="preQuestionNumber">PRELIMINARY QUESTION</div><h2 id="preQuestionText">Waiting for the host…</h2><div class="pre-answer" id="preAnswer" aria-live="polite">?</div></div>
+</main>
+<main id="categoryView" hidden>
 <header><div class="eyebrow">RETRO FAMILY FEUD</div><h1>PICK YOUR CATEGORY!</h1><p>Choose a throwback. Let the showdown begin.</p></header>
 <div class="grid" id="categories" aria-label="Question categories"></div>
 <p class="status" id="status" role="status" aria-live="polite"></p>
@@ -36,9 +52,23 @@
 <button class="icon-btn" id="popupWinnerBtn" aria-label="Show winner" title="Show winner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v6a4 4 0 0 1-8 0V3ZM8 5H4v3a4 4 0 0 0 4 4M16 5h4v3a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6v3"/></svg></button>
 </nav>
 <script src="questions.js"></script>
+<script src="preliminary-questions.js"></script>
 <script src="audio-effects.js"></script>
 <script>
 const questions=window.RETRO_FEUD_QUESTIONS||[];
+const preliminaryQuestions=window.RETRO_PRELIMINARY_QUESTIONS||[];
+let latestState=null,currentView='landing',awaitingCategory=false,winnerRequested=false;
+const requestedView=new URLSearchParams(location.search).get('view')||'categories';
+const landing=document.getElementById('landingView'),landingLogo=landing.querySelector('.retro-logo');
+landing.addEventListener('pointermove',event=>{
+  if(event.pointerType!=='mouse'||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const bounds=landing.getBoundingClientRect();
+  const x=Math.max(-1,Math.min(1,(event.clientX-bounds.left)/bounds.width*2-1));
+  const y=Math.max(-1,Math.min(1,(event.clientY-bounds.top)/bounds.height*2-1));
+  landingLogo.style.setProperty('--tilt-x',`${x*6}deg`);
+  landingLogo.style.setProperty('--tilt-y',`${-y*4}deg`);
+});
+landing.addEventListener('pointerleave',()=>{landingLogo.style.removeProperty('--tilt-x');landingLogo.style.removeProperty('--tilt-y')});
 const status=document.getElementById('status');
 const boardFrame=document.getElementById('boardFrame');
 let boardReady=false,pendingWinner=null;
@@ -47,7 +77,7 @@ function transitionView(view,animate){
   clearTimeout(viewTransitionTimer);
   const loader=document.getElementById('viewLoader');
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.getElementById('loaderLabel').textContent={categories:'PICK A CATEGORY',board:'SURVEY SAYS…',recap:'THE RECAP'}[view];
+  document.getElementById('loaderLabel').textContent={landing:'QUICK FIRE',preliminary:'QUICK FIRE!',categories:'PICK A CATEGORY',board:'SURVEY SAYS…',recap:'THE RECAP'}[view];
   loader.classList.toggle('active',animate);loader.setAttribute('aria-hidden',String(!animate));
   if(animate)viewTransitionTimer=setTimeout(()=>{loader.classList.remove('active');loader.setAttribute('aria-hidden','true')},reduced?100:1400);
 }
@@ -61,25 +91,50 @@ boardFrame.addEventListener('load',()=>{boardReady=true;deliverWinner()});
 document.getElementById('popupWinnerBtn').onclick=()=>{
   RetroAudio.unlock();
   if(!window.opener||window.opener.closed){status.textContent='Open the game window from the host panel to show the winner.';showView('categories');return}
-  showView('board',false);
+  winnerRequested=true;
+  showView('board',false,true);
   window.opener.postMessage({type:'retro-winner-request'},'*');
 };
 function reconnectHost(){if(window.opener&&!window.opener.closed)window.opener.postMessage({type:'retro-game-ready'},'*')} 
-function showView(view,animate=true){
+function showView(view,animate=true,allowWinner=false){
+  if(!allowWinner)winnerRequested=false;
   pendingWinner=null;
   if(boardReady)boardFrame.contentWindow.postMessage({type:'retro-close-winner'},'*');
-  if(!['categories','board','recap'].includes(view))return;
-  transitionView(view,animate&&view!=='recap');
+  if(!['landing','preliminary','categories','board','recap'].includes(view))return;
+  if(view==='categories'&&!latestState?.categoryUnlocked)view='preliminary';
+  if(view==='board'&&!allowWinner&&!latestState?.roundStarted)view='preliminary';
+  if(view==='preliminary'&&!latestState?.preVisible)view='landing';
+  currentView=view;
+  transitionView(view,animate&&!['recap','preliminary','landing'].includes(view));
   reconnectHost();
+  document.getElementById('landingView').hidden=view!=='landing';
+  document.getElementById('preliminaryView').hidden=view!=='preliminary';
   document.getElementById('categoryView').hidden=view!=='categories';
   document.getElementById('boardView').hidden=view!=='board';
   document.getElementById('recapView').hidden=view!=='recap';
-  document.querySelectorAll('[data-view]').forEach(button=>{if(button.dataset.view===view)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')});
+  document.querySelectorAll('[data-view]').forEach(button=>{if(button.dataset.view===view||(['preliminary','landing'].includes(view)&&button.dataset.view==='categories'))button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')});
   if(view==='board'&&!boardFrame.getAttribute('src'))boardFrame.src='index.html?audience=1&embedded=1';
   window.scrollTo(0,0);
 }
 document.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>showView(button.dataset.view));
 document.getElementById('backCategories').onclick=()=>showView('categories');
+function renderPreliminary(state){
+  const question=preliminaryQuestions[state.preQ||0];
+  document.getElementById('preQuestionNumber').textContent=`PRELIMINARY QUESTION ${(state.preQ||0)+1} / ${preliminaryQuestions.length}`;
+  document.getElementById('preQuestionText').textContent=state.preVisible?(question?.q||'No preliminary questions loaded.'):'';
+  const answer=document.getElementById('preAnswer');
+  answer.textContent=state.preVisible&&state.preRevealed?(question?.a||''):'?';
+  answer.classList.toggle('revealed',!!state.preVisible&&!!state.preRevealed);
+  const used=new Set(state.usedCategories||[]);
+  cards.forEach((card,index)=>{
+    const picked=used.has(index);
+    card.disabled=picked||!state.categoryUnlocked;
+    card.classList.toggle('picked',picked);
+    card.title=picked?'Already picked — reset the entire game to play again.':questions[index].cat;
+  });
+  const allPicked=cards.filter(Boolean).every(card=>card.classList.contains('picked'));
+  status.textContent=allPicked?'All categories have been picked. Reset Entire Game to play again.':'';
+}
 function renderRecap(state){
   for(const team of ['A','B']){
     const teamName=state['team'+team];
@@ -110,6 +165,9 @@ questions.forEach((q,index)=>{
   card.append(name);cards[index]=card;
   card.onclick=()=>{
     if(!window.opener||window.opener.closed){status.textContent='Open this Category Window using Show Categories in the host panel.';return}
+    if(!latestState?.categoryUnlocked){showView('preliminary');return}
+    if((latestState.usedCategories||[]).includes(index))return;
+    awaitingCategory=true;
     status.textContent='';
     reconnectHost();
     window.opener.postMessage({type:'retro-category-selected',index},'*');
@@ -124,16 +182,24 @@ window.addEventListener('message',e=>{
     return;
   }
   if(e.source!==window.opener)return;
-  if(e.data?.type==='retro-state'){renderRecap(e.data.state);return}
+  if(e.data?.type==='retro-state'){
+    const initial=!latestState;latestState=e.data.state;renderRecap(latestState);renderPreliminary(latestState);
+    if(initial)showView(requestedView,false);
+    else if(currentView==='preliminary'&&!latestState.preVisible)showView('landing',false);
+    else if(!awaitingCategory&&((currentView==='categories'&&!latestState.categoryUnlocked)||(currentView==='board'&&!latestState.roundStarted&&!winnerRequested)))showView('preliminary',false);
+    return;
+  }
+  if(e.data?.type==='retro-category-rejected'){awaitingCategory=false;status.textContent=e.data.reason;return}
   if(e.data?.type==='retro-winner'){pendingWinner=e.data.state;deliverWinner();return}
   if(e.data?.type==='retro-show-view'){showView(e.data.view);return}
   if(e.data?.type!=='retro-category-ack')return;
   const index=e.data.index;if(!cards[index])return;
+  awaitingCategory=false;
   cards.forEach((card,i)=>{card.classList.toggle('selected',i===index);card.setAttribute('aria-pressed',String(i===index))});
   status.textContent='';
   showView('board');
 });
-showView(new URLSearchParams(location.search).get('view')||'categories');
+showView(requestedView);
 window.addEventListener('focus',reconnectHost);
 window.addEventListener('pageshow',reconnectHost);
 window.addEventListener('storage',e=>{if(e.key==='retroFeudState')reconnectHost()});
